@@ -36,12 +36,12 @@ Clone the repository and make sure that you are on the main branch.
     git submodule update --init --recursive
 
 ### Set up Mamba environment (Recommended)
-Mamba is a package manger used for managing python environments and dependencies, known for having better speed and efficiency than conda. For more information, please refer to this <a href="https://mamba.readthedocs.io/en/latest/user_guide/mamba.html">link</a>. 
+Mamba is a package manager used for managing python environments and dependencies, known for having better speed and efficiency than conda. For more information, please refer to this <a href="https://mamba.readthedocs.io/en/latest/user_guide/mamba.html">link</a>. 
 
     wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh
     bash Mambaforge-Linux-x86_64.sh
 
-Go to `lama` submodule folder, and create `lama` environment. 
+Go to the `lama` submodule folder and create a `lama` environment. 
 
     cd ~/MapEx/lama
     mamba env create -f conda_env.yml
@@ -79,7 +79,7 @@ The `pretrained_model` directory and its subdirectories should be organized as b
                     ├── models
                         ├── best.ckpt    
 
-### Install lib_rangec
+### Install range_libc
 Go to `range_libc` directory and install by following:
 
     cd ~/MapEx/range_libc/pywrapper
@@ -101,7 +101,7 @@ In order to test MapEx, run the `explore.py` script.
 
 This will automatically call `base.yaml`, which contains default parameters and specifies filepaths, environment, and starting conditions. If you want to customize parameters, generate your own yaml file and save it in the `configs` directory. 
 
-Moreover, if you want to specifiy environment and starting positions as arguments to the script. For example, 
+Moreover, you can specify environment and starting positions as arguments to the script. For example, 
 
     python3 explore.py --collect_world_list 50010535_PLAN1 --start_pose 768 551
 
@@ -119,7 +119,7 @@ The list of environments is in the `kth_test_maps` directory. The list of start_
 
 <strong>Ablated methods</strong>: `visvar` (visibility mask + variance + deterministic raycast), `visunk` (visibility mask + counting number of pixels in the area), `obsunk` (visibility mask on observed occupancy grid + counting number of pixels in the area), `onlyvar` (using no visibility mask, but only summing variances) correspond with Deterministic, No Variance, Observed Map, and No Visibility methods in the ablation studies section of our original paper. 
 
-## Evaluations, Metric, and Data Processing
+## Evaluations, Metrics, and Data Processing
 
 ### Trajectory Visualization and Data Postprocessing (Generating predictions for metric)
 
@@ -181,5 +181,6 @@ If you find our paper or code useful, please cite us:
   title={MapEx: Indoor Structure Exploration with Probabilistic Information Gain from Global Map Predictions}, 
   year={2025},
   pages={13074-13080},
-  doi={10.1109/ICRA55743.2025.11128862}}
+  doi={10.1109/ICRA55743.2025.11128862}
+}
 ```
