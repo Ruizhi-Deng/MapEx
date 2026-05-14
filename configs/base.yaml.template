@@ -1,5 +1,5 @@
 # Evaluation runs
-root_path: '/home/richard/Documents/RapLab/MapEx/' #customize this path
+root_path: '/home/richard/Documents/RapLab/dev_leap/src/baselines/mapex/MapEx' #customize this path
 num_data_per_world: 1
 
 test_world_only: false

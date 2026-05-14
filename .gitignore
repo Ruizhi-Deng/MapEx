@@ -6,3 +6,5 @@ range_libc
 **/__pycache__/
 
 *.png
+
+configs/base.yaml

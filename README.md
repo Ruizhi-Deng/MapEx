@@ -1,3 +1,25 @@
+
+## Steps Before Running the Code
+
+```
+git clone --recurse-submodules git@github.com:castacks/MapEx.git
+cd <MapEx>
+git checkout main
+git submodule update --init --recursive
+
+conda activate pelp
+
+cd <MapEx>/lama
+pip install -r requirements.txt
+```
+Then download pretrained prediction models, install range_libc, and install KTH toolbox dependencies for raycasting and observation model.
+
+Finally change the `root_path` in `configs/base.yaml.template` to your local path, and rename the file to `base.yaml`.
+
+
+---
+---
+
 <p align="center">
 <h1 align="center">MapEx: Indoor Structure Exploration with Probabilistic Information Gain from Global Map Predictions</h1>
 <h3 class="is-size-5 has-text-weight-bold" style="color: orange;" align="center">
