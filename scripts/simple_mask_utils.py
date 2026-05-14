@@ -371,7 +371,7 @@ def get_free_points(occupancy_grid, robot_pos, laser_range=10, num_laser=100, us
         raise ValueError("If use_prob is False, hit_prob_thresh must be 1.0")
         
     # Preallocate arrays for maximum possible size
-    max_points = num_laser * laser_range
+    max_points = int(num_laser) * int(laser_range)
     free_points = np.empty((max_points, 2), dtype=np.int64)
     hit_points = np.empty((num_laser, 2), dtype=np.int64)
     actual_hit_points = np.empty((num_laser, 2), dtype=np.int64)
@@ -842,7 +842,9 @@ def get_vis_mask(occupancy_grid, robot_pos, laser_range=50, num_laser=100, rayca
 
     # If you need the boundary points of the expanded shape
     if type(expanded_shape) == MultiPolygon:
-        import pdb; pdb.set_trace()
+        # buffer() produced multiple polygons (e.g. self-intersecting hit_points);
+        # take the largest one so execution can continue
+        expanded_shape = max(expanded_shape.geoms, key=lambda g: g.area)
     expanded_boundary_points = np.array(expanded_shape.exterior.coords).astype(int)
     
     if skip_raycast:

@@ -12,7 +12,8 @@ from matplotlib import pyplot as plt
 # custom imports
 import sys
 sys.path.append('../')
-import simple_mask_utils as smu
+# simple_mask_utils is imported lazily inside functions to avoid circular import
+# (simple_mask_utils itself imports from sim_utils at module level)
 
 def makePyOMap(occ_grid):
     return range_libc.PyOMap(occ_grid)
@@ -27,6 +28,7 @@ def psuedo_traj_controller(plan_x, plan_y, plan_ind_to_use):
     return next_pose
 
 def get_kth_occ_validspace_map(occ_npy_path, validspace_npy_path):
+    import simple_mask_utils as smu  # lazy import to avoid circular dependency
     # TODO: parametrize block_size
     block_size_pix = 2
     # TODO: flesh out this
@@ -70,7 +72,7 @@ def get_kth_occ_validspace_map(occ_npy_path, validspace_npy_path):
 class FrontierPlanner():
     def __init__(self, score_mode=None):
         # TODO: parametrize with hydra 
-        self.region_size_threshold = 10 # Filters out frontier regions that are smaller than this
+        self.region_size_threshold = 3 # Filters out frontier regions that are smaller than this
         self.score_mode = score_mode
         print(self.score_mode)
         assert score_mode in ['nearest', 'visvar', 'visunk','obsunk','onlyvar', 'visvarprob', 'hector', 'hectoraug'],\
@@ -157,6 +159,7 @@ class FrontierPlanner():
         return frontier_val, flooded_grid
     
     def score_frontiers(self, frontier_region_centers, cur_pose, pose_list, pred_maputils, pred_vis_config, obs_map=None, mean_map=None, var_map=None):
+        import simple_mask_utils as smu  # lazy import to avoid circular dependency
         frontier_region_centers = np.array(frontier_region_centers)
         pose_list = np.array(pose_list)
 
@@ -277,6 +280,7 @@ class Mapper():
         """
         Get instantaneous observation with LiDAR sim at a given pose.
         No accumulation."""
+        import simple_mask_utils as smu  # lazy import to avoid circular dependency
         # print('Getting instant obs at pose: ', xy_pose)
         vis_ind, lidar_mask, inited_flood_grid, actual_hit_points, flooded_grid = \
         smu.get_vis_mask(self.gt_map,

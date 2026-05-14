@@ -28,6 +28,7 @@ def convert_obsimg_to_model_input(obs_img, map_transform, device):
 # Visualization
 def load_lama_model(model_path, checkpoint_name='best.ckpt', device='cuda'):
     train_config_path = os.path.join(model_path, 'config.yaml')
+    print(f"Loading LaMa model from {model_path} with checkpoint {checkpoint_name} on device {device}")
     with open(train_config_path, 'r') as f:
         train_config = OmegaConf.create(yaml.safe_load(f))
     
