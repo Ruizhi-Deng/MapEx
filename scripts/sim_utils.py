@@ -12,7 +12,7 @@ from matplotlib import pyplot as plt
 # custom imports
 import sys
 sys.path.append('../')
-from scripts import simple_mask_utils as smu
+import simple_mask_utils as smu
 
 def makePyOMap(occ_grid):
     return range_libc.PyOMap(occ_grid)

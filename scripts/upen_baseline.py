@@ -8,7 +8,7 @@ import time
 import torch
 import hydra
 from omegaconf import OmegaConf
-import scripts.sim_utils as sim_utils
+import sim_utils
 from rrt_star import RRTStar
 
 def get_options_dict_from_yml(config_name):
